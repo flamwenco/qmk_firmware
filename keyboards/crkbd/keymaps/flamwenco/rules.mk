@@ -8,5 +8,6 @@ VIA_ENABLE = yes
 OLED_DRIVER_ENABLE = yes
 LTO_ENABLE = yes
 WPM_ENABLE = yes
+MOUSE_KEYS = yes
 # RAW_ENABLE = yes            # Enable RAW HID communication to PC
 EXTRAFLAGS += -flto

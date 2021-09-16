@@ -1,3 +1,5 @@
 VIA_ENABLE = yes
 RGBLIGHT_ENABLE = yes
 LTO_ENABLE = yes
+MOUSEKEY_ENABLE = yes        # Mouse keys
+CONSOLE_ENABLE = no
