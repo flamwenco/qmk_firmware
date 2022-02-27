@@ -49,3 +49,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /*enable midi slider*/
 #define POT_ENABLE
+
+#define COMBO_COUNT 10
