@@ -16,6 +16,16 @@
 #pragma once
 
 #define IGNORE_MOD_TAP_INTERRUPT //helps with homerow mods
+#define TAPPING_TERM 150
 
-#define COMBO_COUNT 5
+#define COMBO_VARIABLE_LEN
 #define COMBO_TERM 30
+
+#define AUTO_SHIFT_TIMEOUT 150
+#define NO_AUTO_SHIFT_ALPHA
+
+#define LEADER_PER_KEY_TIMING
+#define LEADER_NO_TIMEOUT
+#define LEADER_TIMEOUT 300
+
+

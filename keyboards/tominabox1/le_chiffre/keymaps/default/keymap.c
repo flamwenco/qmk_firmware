@@ -14,51 +14,61 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
+#include "g/keymap_combo.h"
 
 enum layers{
   _BASE,
   _NUM_SYM,
-  _NAV
+  _NAV,
+  _EMACS
 };
 
-enum combo_events {
-  COMBO_BSPC,
-  COMBO_NUMBAK,
-  COMBO_TAB,
-  COMBO_ESC,
-  COMBO_DEL,
+/* enum combo_events { */
+/*   COMBO_BSPC, */
+/*   COMBO_ENT, */
+/*   COMBO_TAB, */
+/*   COMBO_ESC, */
+/*   COMBO_DEL, */
+/* }; */
+
+enum custom_keycodes {
+    EMACS_SAVE = SAFE_RANGE,
 };
 
 #define KC_NUM_SPC LT(_NUM_SYM, KC_SPC)
-#define KC_GA LGUI_T(KC_A)
-#define KC_AS LALT_T(KC_S)
+#define KC_NAV_SPC LT(_NAV, KC_SPC)
 #define KC_CD LCTL_T(KC_D)
 #define KC_SF LSFT_T(KC_F)
 #define KC_SJ RSFT_T(KC_J)
 #define KC_CK RCTL_T(KC_K)
-#define KC_AL RALT_T(KC_L)
-#define KC_GSCLN RGUI_T(KC_SCLN)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT(
-    KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,  KC_MPLY,  KC_Y,   KC_U,    KC_I,   KC_O,     KC_P,
-   KC_GA,  KC_AS,  KC_CD,  KC_SF,   KC_G,            KC_H,  KC_SJ,   KC_CK,  KC_AL, KC_GSCLN,
-    KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,            KC_N,   KC_M, KC_COMM, KC_DOT,  KC_SLSH,
-                         KC_LCTL, KC_ENT,            KC_NUM_SPC, MO(_NAV)
+    KC_Q,   KC_W,   KC_E,   KC_R,    KC_T,   KC_MPLY,  KC_Y,       KC_U,    KC_I,    KC_O,   KC_P,
+    KC_A,   KC_S,   KC_CD,  KC_SF,   KC_G,             KC_H,       KC_SJ,   KC_CK,   KC_L,   KC_SCLN,
+    KC_Z,   KC_X,   KC_C,   KC_V,    KC_B,             KC_N,       KC_M,    KC_COMM, KC_DOT, KC_SLSH,
+                            KC_LGUI, KC_NAV_SPC,       KC_NUM_SPC, KC_LALT
   ),
 
   [_NUM_SYM] = LAYOUT(
-        KC_1,  KC_2,     KC_3,     KC_4,      KC_5,  KC_TRNS,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,
-    KC_EXLM,  KC_AT,  KC_HASH,   KC_DLR,   KC_PERC,            KC_CIRC,  KC_AMPR,  KC_ASTR, KC_EQUAL,  KC_MINS,
-    KC_BSLS,KC_LCBR,  KC_LBRC,  KC_LPRN,   KC_UNDS,            KC_RPRN,  KC_RBRC,  KC_RCBR,   KC_DOT,   KC_GRV,
-                                KC_CAPS,   KC_TRNS,            KC_TRNS,  KC_TRNS
+    KC_1,     KC_2,    KC_3,    KC_4,    KC_5,    KC_TRNS,  KC_6,     KC_7,     KC_8,      KC_9,     KC_0,
+    XXXXXXX,  XXXXXXX, KC_LCTL, KC_F,    KC_G,              KC_CIRC,  KC_MINS,  KC_EQUAL,  KC_LBRC,  KC_RBRC,
+    XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,           XXXXXXX,  KC_QUOT,  KC_BSLS,   KC_GRV,   XXXXXXX,
+                                KC_TRNS, KC_TRNS,           KC_TRNS,  KC_TRNS
   ),
 
   [_NAV] = LAYOUT(
-      QK_BOOT,  _______,  AG_NORM,  AG_SWAP,  DB_TOGG, KC_TRNS,   KC_GRV,  KC_PGDN,    KC_UP,  KC_PGUP,  KC_SCLN,
-    RGB_TOG,  RGB_HUI,  RGB_SAI,  RGB_VAI,  KC_NO,           KC_HOME,  KC_LEFT,  KC_DOWN,  KC_RGHT,   KC_END,
-    RGB_MOD,  RGB_HUD,  RGB_SAD,  RGB_VAD,  KC_NO,           KC_MINS,    KC_INT1,  KC_COMM,   KC_DOT,  KC_BSLS,
-                                  KC_TRNS,KC_TRNS,           KC_TRNS,  KC_TRNS
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_TRNS,  XXXXXXX,  XXXXXXX,  KC_UP,    XXXXXXX,  XXXXXXX,
+    RGB_TOG,  RGB_HUI,  RGB_SAI,  RGB_VAI,  XXXXXXX,            XXXXXXX,  KC_LEFT,  KC_DOWN,  KC_RGHT,  XXXXXXX,
+    RGB_MOD,  RGB_HUD,  RGB_SAD,  RGB_VAD,  XXXXXXX,            XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+                                  KC_TRNS,  KC_TRNS,            KC_TRNS,  KC_TRNS
+  ),
+
+  [_EMACS] = LAYOUT(
+    XXXXXXX,  XXXXXXX,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    XXXXXXX,  EMACS_SAVE,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    XXXXXXX,  XXXXXXX,     XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+                                     XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX
   ),
 };
 
@@ -74,20 +84,20 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 }
 
 #ifdef COMBO_ENABLE
-const uint16_t PROGMEM combo_bspc[] = {KC_O, KC_P, COMBO_END};
-const uint16_t PROGMEM combo_numbak[] = {KC_0, KC_9, COMBO_END};
-const uint16_t PROGMEM combo_tab[] = {KC_Q, KC_W, COMBO_END};
-const uint16_t PROGMEM combo_esc[] = {KC_E, KC_W, COMBO_END};
-const uint16_t PROGMEM combo_del[] = {KC_MINS, KC_EQL, COMBO_END};
+/* const uint16_t PROGMEM combo_bspc[] = {KC_O, KC_P, COMBO_END}; */
+/* const uint16_t PROGMEM combo_ent[] = {KC_L, KC_SCLN, COMBO_END}; */
+/* const uint16_t PROGMEM combo_tab[] = {KC_W, KC_E, COMBO_END}; */
+/* const uint16_t PROGMEM combo_esc[] = {KC_Q, KC_W, COMBO_END}; */
+/* const uint16_t PROGMEM combo_del[] = {KC_I, KC_O, COMBO_END}; */
 
-combo_t key_combos[COMBO_COUNT] = {
-  [COMBO_BSPC] = COMBO(combo_bspc,KC_BSPC),
-  [COMBO_NUMBAK] = COMBO(combo_numbak,KC_BSPC),
-  [COMBO_TAB] = COMBO(combo_tab,KC_TAB),
-  [COMBO_ESC] = COMBO(combo_esc,KC_ESC),
-  [COMBO_DEL] = COMBO(combo_del,KC_DEL),
+/* combo_t key_combos[COMBO_COUNT] = { */
+/*   [COMBO_BSPC] = COMBO(combo_bspc, KC_BSPC), */
+/*   [COMBO_ENT] = COMBO(combo_ent, KC_ENT), */
+/*   [COMBO_TAB] = COMBO(combo_tab, KC_TAB), */
+/*   [COMBO_ESC] = COMBO(combo_esc, KC_ESC), */
+/*   [COMBO_DEL] = COMBO(combo_del, KC_DEL), */
 
-};
+/* }; */
 #endif
 
 #ifdef OLED_ENABLE  //Special thanks to Sickbabies for this great OLED widget!
@@ -109,6 +119,7 @@ void render_lechiffre_logo(void) {
   oled_write_raw_P(lechiffre_logo, sizeof(lechiffre_logo));
 }
 
+
 static void render_layer_status(void) {
     oled_write_P(PSTR("-----"), false);
     switch (get_highest_layer(layer_state)) {
@@ -124,47 +135,6 @@ static void render_layer_status(void) {
         default:
             oled_write_ln_P(PSTR("?????"), false);
     }
-}
-
-#    define KEYLOG_LEN 11
-char     keylog_str[KEYLOG_LEN] = {};
-uint8_t  keylogs_str_idx        = 0;
-uint16_t log_timer              = 0;
-
-const char code_to_name[60] = {
-    ' ', ' ', ' ', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
-    'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
-    'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
-    'R', 'E', 'B', 'T', '_', '-', '=', '[', ']', '\\',
-    '#', ';', '\'', '`', ',', '.', '/', ' ', ' ', ' '};
-
-void add_keylog(uint16_t keycode) {
-    if ((keycode >= QK_MOD_TAP && keycode <= QK_MOD_TAP_MAX) || (keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX)) {
-        keycode = keycode & 0xFF;
-    }
-
-    for (uint8_t i = KEYLOG_LEN - 1; i > 0; i--) {
-        keylog_str[i] = keylog_str[i - 1];
-    }
-    if (keycode < 60) {
-        keylog_str[0] = code_to_name[keycode];
-    }
-    keylog_str[KEYLOG_LEN - 1] = 0;
-
-    log_timer = timer_read();
-}
-
-void update_log(void) {
-    if (timer_elapsed(log_timer) > 750) {
-        add_keylog(0);
-    }
-}
-
-//Text only renders
-void render_keylogger_status(void) {
-    oled_write_P(PSTR("-----"), false);
-    oled_write(keylog_str, false);
 }
 
 void render_keylock_status(led_t led_state) {
@@ -191,15 +161,52 @@ bool oled_task_user(void) {
     render_layer_status();	// Renders the current keyboard state (layer, lock, caps, scroll, etc)
 	render_mod_status(get_mods()|get_oneshot_mods());
 	render_keylock_status(host_keyboard_led_state());
-	render_keylogger_status();
 
     return false;
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed) {
-      add_keylog(keycode);
+    switch (keycode) {
+    case EMACS_SAVE:
+        if (record->event.pressed) {
+	  // emacs write buffer
+	  SEND_STRING(SS_LCTL("x") SS_LCTL("s"));
+        }
+        break;
     }
+
     return true;
   }
+#endif
+
+#ifdef LEADER_ENABLE
+LEADER_EXTERNS();
+
+void matrix_scan_user(void) {
+  LEADER_DICTIONARY() {
+    leading = false;
+    leader_end();
+
+    SEQ_TWO_KEYS(KC_X, KC_S) {
+      // Emacs save
+      SEND_STRING(SS_LCTL("x") SS_LCTL("s"));
+    }
+    SEQ_TWO_KEYS(KC_X, KC_B) {
+      // Emacs buffer list
+      SEND_STRING(SS_LCTL("x") "b");
+    }
+    SEQ_TWO_KEYS(KC_COMMA, KC_M) {
+      // Emacs top of doc
+      SEND_STRING(SS_LALT(SS_LSFT(",")));
+    }
+    SEQ_TWO_KEYS(KC_COMMA, KC_DOT) {
+      // Emacs top of doc
+      SEND_STRING(SS_LALT(SS_LSFT(".")));
+    }
+    SEQ_ONE_KEY(KC_COMMA) {
+      // Toggle console
+      SEND_STRING(SS_LCTL("`"));
+    }
+  }
+}
 #endif

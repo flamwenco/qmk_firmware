@@ -1,0 +1,31 @@
+// Base 10u combos
+COMB(qwEsc,   KC_ESC,          KC_Q, KC_W)
+COMB(weTab,   KC_TAB,          KC_W, KC_E)
+COMB(lscEnt,  KC_ENT,          KC_L, KC_SCLN)
+COMB(opBsp,   KC_BSPC,         KC_O, KC_P)
+COMB(ioDel,   KC_DEL,          KC_I, KC_O)
+
+// Reset keyboard
+COMB(reset,   QK_BOOT,         KC_R, KC_E, KC_S, KC_T)
+
+// Function keys
+COMB(f1,      KC_F1,           KC_F, KC_1)
+COMB(f2,      KC_F2,           KC_F, KC_2)
+COMB(f3,      KC_F3,           KC_F, KC_3)
+COMB(f4,      KC_F4,           KC_F, KC_4)
+COMB(f5,      KC_F5,           KC_F, KC_5)
+COMB(f6,      KC_F6,           KC_F, KC_6)
+COMB(f7,      KC_F7,           KC_F, KC_7)
+COMB(f8,      KC_F8,           KC_F, KC_8)
+COMB(f9,      KC_F9,           KC_F, KC_9)
+COMB(f10,     KC_F10,          KC_F, KC_0)
+COMB(f11,     KC_F11,          KC_G, KC_1)
+COMB(f12,     KC_F12,          KC_G, KC_2)
+
+// Cut, copy, paste
+COMB(copy,    LGUI(KC_C),      KC_J, KC_C)
+COMB(cut,     LGUI(KC_X),      KC_J, KC_X)
+COMB(paste,   LGUI(KC_V),      KC_J, KC_V)
+
+// Leader
+COMB(leader,  KC_LEAD,         KC_L, RCTL_T(KC_K))
